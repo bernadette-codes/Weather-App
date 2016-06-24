@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Bernadette Engleman">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <title>Weather App</title>
 </head>
@@ -16,54 +15,50 @@
 <body>
 
 <!-- Home -->
-<nav class="navbar">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="http://www.bernadetteengleman.com/" id="home">Home</a>
-        </div>
+<nav class="navbar container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="http://www.bernadetteengleman.com/" id="home">Home</a>
     </div>
 </nav>
 
-<main>
-    <div class="container">
-        <h1 class="text-center" id="titleFont">Weather App</h1>
+<main class="container">
 
-        <div class="row weather">
-            <!-- Temperature -->
-            <div class="col-md-6">
-                <p id="temperature">Temperature</p>
-            </div>
-            <!-- City, State -->
-            <div class="col-md-6">
-                <p id="cityLoc">Your Location</p>
-            </div>
+    <h1 class="text-center" id="titleFont">Weather App</h1>
+
+    <div class="row weather">
+        <!-- Temperature -->
+        <div class="col-md-6">
+            <p id="temperature">Temperature</p>
         </div>
-
-        <div class="row weather">
-            <div class="col-md-6">
-                <!-- Weather -->
-                <p id="weatherToday">Weather Today</p>
-                <!-- Forecast -->
-                <p id="forecast">5-Day Forecast</p>
-            </div>
-            <!-- Geo Map -->
-            <div class="col-md-6">
-                <div id="mapholder">Location Map</div>
-            </div>
+        <!-- City, State -->
+        <div class="col-md-6">
+            <p id="cityLoc">Your Location</p>
         </div>
-
     </div>
+
+    <div class="row weather">
+        <div class="col-md-6">
+            <!-- Weather -->
+            <p id="weatherToday">Weather Today</p>
+            <!-- Forecast -->
+            <p id="forecast">5-Day Forecast</p>
+        </div>
+        <!-- Geo Map -->
+        <div class="col-md-6">
+            <div id="mapholder">Location Map</div>
+        </div>
+    </div>
+
 </main>
 
 <footer class="container-fluid text-center">
-    <div>
-        <p>Copyright © <span id="year"></span> Bernadette Engleman. All rights reserved.</p>
-    </div>
+    <p>Copyright © <span id="year"></span> Bernadette Engleman. All rights reserved.</p>
 </footer>
 
-<script type="text/javascript" src="weather.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/monkeecreate/jquery.simpleWeather/master/jquery.simpleWeather.min.js"></script>
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="weather.js"></script>
 
 </body>
 
