@@ -12,31 +12,29 @@ body {
     margin: 0 0 30px;
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
 }
 
-.navbar {
-    min-height:30px !important;
+nav.navbar {
+    min-height: 30px;
 }
 
-.navbar-brand {
+nav.navbar a.navbar-brand {
     height: 30px;
     background-color: #2654ca;
     border-radius: 5px;
-    padding-top:5px !important;
-    padding-bottom:0 !important;
+    padding-top: 5px;
+    padding-bottom: 0;
     border: 1px solid #0A1635;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    margin: 5px;
+    font-size: 1.25em;
 }
 
-a {
-    color: #ffffff !important;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
-    margin: 5px !important;
-    font-size: 1.25em !important;
-}
-
-a:hover {
+nav.navbar a:hover {
     background-color: #ffffff;
-    color: #2654ca !important;
+    color: #2654ca;
     border: 1px solid #0A1635;
 }
 
