@@ -15,11 +15,12 @@ body {
 
 }
 
+/* Home Link */
 nav.navbar {
     min-height: 30px;
 }
 
-nav.navbar a.navbar-brand {
+a.navbar-brand {
     height: 30px;
     background-color: #2654ca;
     border-radius: 5px;
@@ -32,13 +33,15 @@ nav.navbar a.navbar-brand {
     font-size: 1.25em;
 }
 
-nav.navbar a:hover {
+a.navbar-brand:hover {
     background-color: #ffffff;
     color: #2654ca;
     border: 1px solid #0A1635;
 }
 
-#titleFont, #temperature, #weatherToday, #forecast, #cityLoc, #mapholder {
+.titleFont, #temperature,
+#weatherToday, #forecast,
+#cityLoc, #mapholder {
     background-color: #2654ca;
     padding: 10px;
     border: 1px solid #0A1635;
@@ -47,7 +50,8 @@ nav.navbar a:hover {
     width: 400px;
 }
 
-#titleFont {
+/* Weather App Title */
+.titleFont {
     font-size: 2.6em;
     margin: 0 auto 10px;
     border-radius: 8px;
@@ -112,7 +116,8 @@ footer {
 }
 
 @media screen and (max-width: 990px) {
-    #titleFont {
+    /* Weather App Title */
+    .titleFont {
         margin-bottom: 30px;
     }
     #temperature {
@@ -129,10 +134,13 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
-    #titleFont, #temperature, #weatherToday, #forecast, #cityLoc, #mapholder {
+    .titleFont, #temperature,
+    #weatherToday, #forecast,
+    #cityLoc, #mapholder {
         width: 260px;
     }
-    #titleFont {
+    /* Weather App Title */
+    .titleFont {
         font-size: 2em;
     }
     #cityLoc {
@@ -147,7 +155,9 @@ footer {
 }
 
 @media screen and (max-width: 350px) {
-    #titleFont, #temperature, #weatherToday, #forecast, #cityLoc, #mapholder {
+    .titleFont, #temperature,
+    #weatherToday, #forecast,
+    #cityLoc, #mapholder {
         width: 230px;
     }
 }
