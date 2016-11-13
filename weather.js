@@ -23,8 +23,8 @@ function loadWeather(location, woeid) {
              }
              */
 
-            document.getElementById("temperature").innerHTML = weather.temp+'&deg;'+weather.units.temp+' / '+weather.alt.temp+'&deg;C';
-            document.getElementById("cityLoc").innerHTML = weather.city+', '+weather.region;
+            document.getElementById("temperature").innerHTML = weather.temp + '&deg;' + weather.units.temp + ' / ' + weather.alt.temp + '&deg;C';
+            document.getElementById("cityLoc").innerHTML = weather.city + ', ' + weather.region;
             document.getElementById("weatherToday").innerHTML = weather.currently;
 
             /*
@@ -48,10 +48,11 @@ function loadForecast(location, woeid) {
         location: location,
         unit: 'f',
         success: function (weather) {
-            html = '<h2 id="sameFont">5-Day Forecast</h2>';
+            html = '<h2 id = "sameFont">5-Day Forecast</h2>';
             html += '<p>Day &nbsp; Low / High</p>';
 
-            for (var i = 0; i < 5; i++) {
+            var i;
+            for (i = 0; i < 5; i++) {
                 html += '<p>' + weather.forecast[i].day + ': ' + weather.forecast[i].low + '&deg;' + weather.units.temp + ' / ' + weather.forecast[i].high + '&deg;' + weather.units.temp + '</p>';
             }
 
@@ -75,7 +76,7 @@ function getLocation() {
 function showPosition(position) {
     latlon = new google.maps.LatLng(lat, lon);
 
-    windowWidth=$(window).width();
+    windowWidth = $(window).width();
     mapholder = document.getElementById('mapholder');
 
     if (windowWidth <= 380) {
@@ -87,14 +88,20 @@ function showPosition(position) {
     }
 
     var myOptions = {
-        center:latlon,zoom:12,
-        mapTypeId:google.maps.MapTypeId.ROADMAP,
-        mapTypeControl:false,
-        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-    };
-
-    var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
-    var marker = new google.maps.Marker({position:latlon,map:map,title:"Your location!"});
+        center: latlon,
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL
+        }
+    },
+        map = new google.maps.Map(document.getElementById("mapholder"), myOptions),
+        marker = new google.maps.Marker({
+            position: latlon,
+            map: map,
+            title: "Your location!"
+        });
 }
 
 $(document).ready(function() {
@@ -103,10 +110,10 @@ $(document).ready(function() {
         lon = position.coords.longitude;
 
         //Call weather today
-        loadWeather(lat+','+lon);
+        loadWeather(lat + ',' + lon);
 
         //Call Forecast
-        loadForecast(lat+','+lon);
+        loadForecast(lat + ',' + lon);
 
         //Call Location Map
         getLocation();
