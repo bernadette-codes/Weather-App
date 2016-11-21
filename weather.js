@@ -77,7 +77,7 @@ function showPosition(position) {
     latlon = new google.maps.LatLng(lat, lon);
 
     windowWidth = $(window).width();
-    mapholder = document.getElementById('mapholder');
+    mapholder = document.getElementById("mapholder");
 
     if (windowWidth <= 380) {
         mapholder.style.height = '250px';
@@ -96,7 +96,7 @@ function showPosition(position) {
             style: google.maps.NavigationControlStyle.SMALL
         }
     },
-        map = new google.maps.Map(document.getElementById("mapholder"), myOptions),
+        map = new google.maps.Map(mapholder, myOptions),
         marker = new google.maps.Marker({
             position: latlon,
             map: map,
