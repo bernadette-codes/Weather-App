@@ -33,13 +33,13 @@ function loadWeather(location, woeid) {
              html += '<h4 class="currently">'+weather.currently+'</h4>';
              $("#weather").html(html);
              */
-        },
+        }, // end success function
 
         error: function(error) {
             alert("An unknown error occurred.");
         }
-    });
-}
+    }); // end simpleWeather
+} // end loadWeather
 
 //Get 5-Day Forecast
 function loadForecast(location, woeid) {
@@ -50,19 +50,18 @@ function loadForecast(location, woeid) {
         success: function (weather) {
             html = '<h2 id = "sameFont">5-Day Forecast</h2>';
             html += '<p>Day &nbsp; Low / High</p>';
-
             var i;
             for (i = 0; i < 5; i++) {
                 html += '<p>' + weather.forecast[i].day + ': ' + weather.forecast[i].low + '&deg;' + weather.units.temp + ' / ' + weather.forecast[i].high + '&deg;' + weather.units.temp + '</p>';
             }
-
             $("#forecast").html(html);
-        },
+        }, // end success function
+
         error: function (error) {
             alert(error);
         }
-    });
-}
+    }); // end simpleWeather
+} // end loadForecast
 
 //Show Location Map
 function getLocation() {
@@ -71,11 +70,10 @@ function getLocation() {
     } else {
         alert("An error occurred.");
     }
-}
+} // end getLocation
 
 function showPosition(position) {
     latlon = new google.maps.LatLng(lat, lon);
-
     windowWidth = $(window).width();
     mapholder = document.getElementById("mapholder");
 
@@ -95,14 +93,14 @@ function showPosition(position) {
         navigationControlOptions: {
             style: google.maps.NavigationControlStyle.SMALL
         }
-    },
+    }, //end myOptions
         map = new google.maps.Map(mapholder, myOptions),
         marker = new google.maps.Marker({
             position: latlon,
             map: map,
             title: "Your location!"
-        });
-}
+        }); // end marker
+} // end showPosition
 
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -117,7 +115,7 @@ $(document).ready(function() {
 
         //Call Location Map
         getLocation();
-    });
-});
+    }); // end getCurrentPosition
+}); // end ready
 
 //alert(windowWidth);
