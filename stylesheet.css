@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    background: url(background.jpg) center center / cover no-repeat fixed;
+    background: linear-gradient(#3aab7e, #ffffff);
     padding: 0;
     margin: 0 0 30px;
     color: #fff;
@@ -22,32 +22,32 @@ nav.navbar {
 
 a.navbar-brand {
     height: 30px;
-    background-color: #2654ca;
     border-radius: 5px;
     padding-top: 5px;
     padding-bottom: 0;
-    border: 1px solid #0A1635;
-    color: #ffffff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     margin: 5px;
     font-size: 1.25em;
 }
 
 a.navbar-brand:hover {
-    background-color: #ffffff;
-    color: #2654ca;
-    border: 1px solid #0A1635;
+    text-decoration: underline;
+    border: 1px solid #d0dde5;
+    color: #3e4244;
 }
 
-.titleFont, #temperature,
-#weatherToday, #forecast,
-#cityLoc, #mapholder {
-    background-color: #2654ca;
+.titleFont, #temperature, #forecast,
+#weatherToday, #mapholder {
     padding: 10px;
-    border: 1px solid #0A1635;
     margin-left: auto;
     margin-right: auto;
     width: 400px;
+}
+
+.colorSet {
+    background-color: #d7eee5;
+    border: 1px solid #c1d6ce;
+    color: #3e4244;
 }
 
 /* Weather App Title */
@@ -62,27 +62,10 @@ a.navbar-brand:hover {
     text-align: center;
 }
 
-#cityLoc {
-    font-size: 40px;
+#weatherToday, #temperature {
+    font-size: 25px;
     border-radius: 8px;
     margin-top: 20px;
-}
-
-#temperature, #weatherToday {
-    font-size: 30px;
-    font-weight: 300;
-}
-
-#temperature {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-#weatherToday {
-    margin-top: -65px;
-    border-top: none;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }
 
 #forecast {
@@ -92,7 +75,6 @@ a.navbar-brand:hover {
 }
 
 #forecast h2 {
-    text-decoration: underline;
     margin-bottom: 15px;
 }
 
@@ -115,49 +97,39 @@ footer {
     padding-top: 30px;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 992px) {
     /* Weather App Title */
     .titleFont {
-        margin-bottom: 30px;
-    }
-    #temperature {
-        border-radius: 8px;
-    }
-    #cityLoc {
-        margin: 10px auto;
-    }
-    #weatherToday {
         margin-top: 0;
-        border: 1px solid #0A1635;
-        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    #temperature, #weatherToday,
+    #forecast {
+        margin: 10px auto;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .titleFont, #temperature,
-    #weatherToday, #forecast,
-    #cityLoc, #mapholder {
+    .titleFont, #temperature, #forecast,
+    #weatherToday, #mapholder {
         width: 260px;
     }
     /* Weather App Title */
     .titleFont {
         font-size: 2em;
     }
-    #cityLoc {
-        font-size: 20px;
-    }
+
     #temperature, #weatherToday, #sameFont {
-        font-size: 15px;
+        font-size: 12px;
     }
     #forecast, #mapholder {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 
 @media screen and (max-width: 350px) {
     .titleFont, #temperature,
-    #weatherToday, #forecast,
-    #cityLoc, #mapholder {
+    #forecast, #weatherToday, #mapholder {
         width: 230px;
     }
 }
