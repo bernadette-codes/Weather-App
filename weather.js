@@ -1,63 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+// Copyright Year
+var d = new Date(),
+    n = d.getFullYear();
+document.getElementById("year").innerHTML = n;
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Weather App</title>
-    <meta name="description" content="weather app">
-    <meta name="keywords" content="weather app, weather forecast">
-    <meta name="author" content="Bernadette Engleman">
-    <link rel="shortcut icon" href="../../img/beIcon.png">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheet.css">
-</head>
+//Get weather using lat/lng coordinates
+function loadWeather() {
+    var units = 'imperial',
+        url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=' + units + '&appid=16c3de9108ed16c9179c1c51008b687e';
 
-<body>
+    $.getJSON(url, function(data) {
+        // Fetch the weather after the API call.
+        var tempF = data.main.temp,
+            tempUnit = units === 'metric' ? 'C' : 'F',
+            tempC = ((tempF - 32) / (9/5)).toFixed(2),
+            description = data.weather[0].description;
 
-<!-- Home Link -->
-<nav class="navbar container-fluid">
-    <a class="navbar-brand colorSet" href="../../index.html">Home</a>
-</nav>
+        //Display Temperature
+        document.getElementById("temperature").innerHTML = tempF + '&deg;' + tempUnit + ' / ' + tempC + '&deg;C';
+        document.getElementById("weatherToday").innerHTML = description;
 
-<main class="container">
-    <!-- Title -->
-    <h1 class="text-center titleFont colorSet">Weather App</h1>
+        //Sets Background Color Based on Temperature
+        if(tempF <= 82.4){
+            //Blue Background
+            $("body").css("background", "linear-gradient(#3A67AB, #E8F6FF)");
+            $(".colorSet").css({"background-color": "#3A67AB", "color": "#ffffff", "border": "1px solid #E8F6FF"});
+        } else {
+            //Red Background
+            $("body").css("background", "linear-gradient(#ab453a, #f6eceb)");
+            $(".colorSet").css({"background-color": "#ab453a", "color": "#ffffff", "border": "1px solid #f6eceb"});
+        }
+    });
 
-    <section class="row weather">
-        <!-- Temperature -->
-        <div class="col-md-6">
-            <p id="temperature" class="colorSet">Temperature</p>
-        </div>
-        <!-- Weather -->
-        <div class="col-md-6">
-            <p id="weatherToday" class="colorSet">Weather Today</p>
-        </div>
-    </section>
+} // end loadWeather
 
-    <section class="row weather">
-        <div class="col-md-6">
-            <!-- Forecast -->
-            <p id="forecast" class="colorSet">5-Day Forecast</p>
-        </div>
-        <!-- Geo Map -->
-        <div class="col-md-6">
-            <div id="mapholder" class="colorSet">Location Map</div>
-        </div>
-    </section>
-</main>
+//Get 5-Day Forecast
+function loadForecast(location, woeid) {
+    $.simpleWeather({
+        woeid: woeid,
+        location: location,
+        unit: 'f',
+        success: function (weather) {
+            html = '<h2 id = "sameFont">5-Day Forecast</h2>';
+            html += '<p>Day &nbsp; Low / High</p>';
+            var i;
+            for (i = 0; i < 5; i++) {
+                html += '<p>' + weather.forecast[i].day + ' - ' + weather.forecast[i].low + '&deg;' + weather.units.temp + ' / ' + weather.forecast[i].high + '&deg;' + weather.units.temp + '</p>';
+            }
+            $("#forecast").html(html);
+        }, // end success function
 
-<footer class="container-fluid text-center">
-    <p><small>Copyright © <span id="year"></span> Bernadette Engleman. All rights reserved.</small></p>
-</footer>
+        error: function (error) {
+            alert(error);
+        }
+    }); // end simpleWeather
+} // end loadForecast
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="https://cdn.rawgit.com/monkeecreate/jquery.simpleWeather/master/jquery.simpleWeather.min.js"></script>
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="weather.js"></script>
+//Show Location Map
+function getLocation() {
+    if (navigator.geolocation) {
+        showPosition();
+    } else {
+        alert("An error occurred.");
+    }
+} // end getLocation
 
-</body>
+function showPosition() {
+    var latlon = new google.maps.LatLng(lat, lon),
+        windowWidth = $(window).width(),
+        mapholder = document.getElementById("mapholder");
 
-</html>
+    if (windowWidth <= 380) {
+        mapholder.style.height = '250px';
+        mapholder.style.width = '230px';
+    } else {
+        mapholder.style.height = '325px';
+        mapholder.style.width = '320px';
+    }
+
+    var myOptions = {
+            center: latlon,
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            }
+        }, //end myOptions
+        map = new google.maps.Map(mapholder, myOptions),
+        marker = new google.maps.Marker({
+            position: latlon,
+            map: map,
+            title: "Your location!"
+        }); // end marker
+} // end showPosition
+
+$(document).ready(function() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+
+        //Call weather today
+        loadWeather();
+
+        //Call Forecast
+        loadForecast(lat + ',' + lon);
+
+        //Call Location Map
+        getLocation();
+    }); // end getCurrentPosition
+
+}); // end ready
