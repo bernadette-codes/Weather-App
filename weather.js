@@ -1,121 +1,63 @@
-// Copyright Year
-var d = new Date(),
-    n = d.getFullYear();
-document.getElementById("year").innerHTML = n;
+<!DOCTYPE html>
+<html lang="en">
 
-//Get weather using lat/lng coordinates
-function loadWeather(location, woeid) {
-    $.simpleWeather({
-        location: location,
-        woeid: woeid,
-        unit: 'f',
-        success: function(weather) {
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+    <meta name="description" content="weather app">
+    <meta name="keywords" content="weather app, weather forecast">
+    <meta name="author" content="Bernadette Engleman">
+    <link rel="shortcut icon" href="../../img/beIcon.png">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
 
-            /*
-             if (weather.alt.temp <= 5) {
-             document.getElementById("changeBG").className = "below5";
-             } else if (weather.alt.temp <= 15) {
-             document.getElementById("changeBG").className = "below15";
-             } else if (weather.alt.temp <= 25) {
-             document.getElementById("changeBG").className = "below25";
-             } else {
-             document.getElementById("changeBG").className = "hot";
-             }
-             */
+<body>
 
-            document.getElementById("temperature").innerHTML = weather.temp + '&deg;' + weather.units.temp + ' / ' + weather.alt.temp + '&deg;C';
-            document.getElementById("cityLoc").innerHTML = weather.city + ', ' + weather.region;
-            document.getElementById("weatherToday").innerHTML = weather.currently;
+<!-- Home Link -->
+<nav class="navbar container-fluid">
+    <a class="navbar-brand colorSet" href="../../index.html">Home</a>
+</nav>
 
-            /*
-             html = '<h2>'+weather.temp+'&deg;'+weather.units.temp+' / '+weather.alt.temp+'&deg;C</h2>';
-             html += '<h3>'+weather.city+', '+weather.region+'</h3>';
-             html += '<h4 class="currently">'+weather.currently+'</h4>';
-             $("#weather").html(html);
-             */
-        }, // end success function
+<main class="container">
+    <!-- Title -->
+    <h1 class="text-center titleFont colorSet">Weather App</h1>
 
-        error: function(error) {
-            alert("An unknown error occurred.");
-        }
-    }); // end simpleWeather
-} // end loadWeather
+    <section class="row weather">
+        <!-- Temperature -->
+        <div class="col-md-6">
+            <p id="temperature" class="colorSet">Temperature</p>
+        </div>
+        <!-- Weather -->
+        <div class="col-md-6">
+            <p id="weatherToday" class="colorSet">Weather Today</p>
+        </div>
+    </section>
 
-//Get 5-Day Forecast
-function loadForecast(location, woeid) {
-    $.simpleWeather({
-        woeid: woeid,
-        location: location,
-        unit: 'f',
-        success: function (weather) {
-            html = '<h2 id = "sameFont">5-Day Forecast</h2>';
-            html += '<p>Day &nbsp; Low / High</p>';
-            var i;
-            for (i = 0; i < 5; i++) {
-                html += '<p>' + weather.forecast[i].day + ': ' + weather.forecast[i].low + '&deg;' + weather.units.temp + ' / ' + weather.forecast[i].high + '&deg;' + weather.units.temp + '</p>';
-            }
-            $("#forecast").html(html);
-        }, // end success function
+    <section class="row weather">
+        <div class="col-md-6">
+            <!-- Forecast -->
+            <p id="forecast" class="colorSet">5-Day Forecast</p>
+        </div>
+        <!-- Geo Map -->
+        <div class="col-md-6">
+            <div id="mapholder" class="colorSet">Location Map</div>
+        </div>
+    </section>
+</main>
 
-        error: function (error) {
-            alert(error);
-        }
-    }); // end simpleWeather
-} // end loadForecast
+<footer class="container-fluid text-center">
+    <p><small>Copyright © <span id="year"></span> Bernadette Engleman. All rights reserved.</small></p>
+</footer>
 
-//Show Location Map
-function getLocation() {
-    if (navigator.geolocation) {
-        showPosition();
-    } else {
-        alert("An error occurred.");
-    }
-} // end getLocation
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/monkeecreate/jquery.simpleWeather/master/jquery.simpleWeather.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="weather.js"></script>
 
-function showPosition(position) {
-    latlon = new google.maps.LatLng(lat, lon);
-    windowWidth = $(window).width();
-    mapholder = document.getElementById("mapholder");
+</body>
 
-    if (windowWidth <= 380) {
-        mapholder.style.height = '250px';
-        mapholder.style.width = '230px';
-    } else {
-        mapholder.style.height = '325px';
-        mapholder.style.width = '320px';
-    }
-
-    var myOptions = {
-        center: latlon,
-        zoom: 12,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        navigationControlOptions: {
-            style: google.maps.NavigationControlStyle.SMALL
-        }
-    }, //end myOptions
-        map = new google.maps.Map(mapholder, myOptions),
-        marker = new google.maps.Marker({
-            position: latlon,
-            map: map,
-            title: "Your location!"
-        }); // end marker
-} // end showPosition
-
-$(document).ready(function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-
-        //Call weather today
-        loadWeather(lat + ',' + lon);
-
-        //Call Forecast
-        loadForecast(lat + ',' + lon);
-
-        //Call Location Map
-        getLocation();
-    }); // end getCurrentPosition
-}); // end ready
-
-//alert(windowWidth);
+</html>
