@@ -8,7 +8,7 @@ function loadWeather() {
     var units = 'imperial',
         url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=' + units + '&appid=16c3de9108ed16c9179c1c51008b687e';
 
-    $.getJSON(url, function(data) {
+        $.getJSON(url, function(data) {
         // Fetch the weather after the API call.
         var tempF = data.main.temp,
             tempUnit = units === 'metric' ? 'C' : 'F',
@@ -50,7 +50,7 @@ function loadForecast(location, woeid) {
         }, // end success function
 
         error: function (error) {
-            alert(error);
+            $("#forecast").append("<p>"+error+"</p>");
         }
     }); // end simpleWeather
 } // end loadForecast
