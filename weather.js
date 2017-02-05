@@ -3,12 +3,34 @@ var d = new Date(),
     n = d.getFullYear();
 document.getElementById("year").innerHTML = n;
 
+//Get 5-Day Forecast
+function loadForecast(location, woeid) {
+    $.simpleWeather({
+        woeid: woeid,
+        location: location,
+        unit: 'f',
+        success: function (weather) {
+            html = '<h2 id = "sameFont">5-Day Forecast</h2>';
+            html += '<p>Day &nbsp; Low / High</p>';
+            var i;
+            for (i = 0; i < 5; i++) {
+                html += '<p>' + weather.forecast[i].day + ' - ' + weather.forecast[i].low + '&deg;' + weather.units.temp + ' / ' + weather.forecast[i].high + '&deg;' + weather.units.temp + '</p>';
+            }
+            $("#forecast").html(html);
+        }, // end success function
+
+        error: function (error) {
+            $("#forecast").append("<p>"+error+"</p>");
+        }
+    }); // end simpleWeather
+} // end loadForecast
+
 //Get weather using lat/lng coordinates
 function loadWeather() {
     var units = 'imperial',
         url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=' + units + '&appid=16c3de9108ed16c9179c1c51008b687e';
 
-        $.getJSON(url, function(data) {
+    $.getJSON(url, function(data) {
         // Fetch the weather after the API call.
         var tempF = data.main.temp,
             tempUnit = units === 'metric' ? 'C' : 'F',
@@ -32,28 +54,6 @@ function loadWeather() {
     });
 
 } // end loadWeather
-
-//Get 5-Day Forecast
-function loadForecast(location, woeid) {
-    $.simpleWeather({
-        woeid: woeid,
-        location: location,
-        unit: 'f',
-        success: function (weather) {
-            html = '<h2 id = "sameFont">5-Day Forecast</h2>';
-            html += '<p>Day &nbsp; Low / High</p>';
-            var i;
-            for (i = 0; i < 5; i++) {
-                html += '<p>' + weather.forecast[i].day + ' - ' + weather.forecast[i].low + '&deg;' + weather.units.temp + ' / ' + weather.forecast[i].high + '&deg;' + weather.units.temp + '</p>';
-            }
-            $("#forecast").html(html);
-        }, // end success function
-
-        error: function (error) {
-            $("#forecast").append("<p>"+error+"</p>");
-        }
-    }); // end simpleWeather
-} // end loadForecast
 
 //Show Location Map
 function getLocation() {
@@ -99,11 +99,11 @@ $(document).ready(function() {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
 
-        //Call weather today
-        loadWeather();
-
         //Call Forecast
         loadForecast(lat + ',' + lon);
+
+        //Call weather today
+        loadWeather();
 
         //Call Location Map
         getLocation();
