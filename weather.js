@@ -38,8 +38,8 @@ function loadWeather() {
             description = data.weather[0].description;
 
         //Display Temperature
-        document.getElementById("temperature").innerHTML = tempF + '&deg;' + tempUnit + ' / ' + tempC + '&deg;C';
-        document.getElementById("weatherToday").innerHTML = description;
+        $('#temperature').html(tempF + '&deg;' + tempUnit + ' / ' + tempC + '&deg;C');
+        $('#weatherToday').html(description);
 
         //Sets Background Color Based on Temperature
         if(tempF <= 82.4){
@@ -65,8 +65,8 @@ function getLocation() {
 } // end getLocation
 
 function showPosition() {
-    var latlon = new google.maps.LatLng(lat, lon),
-        windowWidth = $(window).width(),
+    var windowWidth = $(window).width(),
+        latlon = new google.maps.LatLng(lat, lon),
         mapholder = document.getElementById("mapholder");
 
     if (windowWidth <= 380) {
