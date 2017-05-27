@@ -1,7 +1,7 @@
 **Weather App**
 --------------------
 
-[Weather App](http://www.bernadetteengleman.com/Apps/Weather-App/weatherapp.html) shows the temperature, weather today and 5-day forecast based on the user's location. The background color also changes based on today's temperature.
+[Weather App](http://www.bernadetteengleman.com/Apps/Weather-App/weatherapp.html) shows the temperature, weather today and 5-day forecast based on the user's location.
 
 ![Weather App](http://www.bernadetteengleman.com/img/portfolio/weatherappthumbnail2.jpg)
 
@@ -12,6 +12,7 @@
  - Detects and shows the user’s location using Geolocation API
  - Provides location’s current weather using Open Weather API
  - Features 5-day forecast using simpleWeather.js API
+ - Background color changes based on today's temperature
 
 **Front-End:**
 
