@@ -107,7 +107,7 @@ footer {
     }
     #temperature, #weatherToday,
     #forecast {
-        margin: 10px auto;
+        margin: 20px auto;
     }
 }
 
