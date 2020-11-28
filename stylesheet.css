@@ -9,7 +9,7 @@ html {
 body {
     background: linear-gradient(#3aab7e, #ffffff);
     padding: 0;
-    margin: 0 0 30px;
+    margin: 0 0 20px;
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
@@ -32,10 +32,11 @@ a.navbar-brand {
 
 a.navbar-brand:hover,
 a.navbar-brand:focus {
-    text-decoration: underline;
-    border: 1px solid #d0dde5;
+    text-decoration: none;
+    /* border: 1px solid #d0dde5; */
     color: #3e4244;
     outline: none;
+    transform: scale(1.05);
 }
 
 .titleFont, #temperature, #forecast,
@@ -48,7 +49,6 @@ a.navbar-brand:focus {
 
 .colorSet {
     background-color: #d7eee5;
-    border: 1px solid #c1d6ce;
     color: #3e4244;
 }
 
@@ -94,7 +94,7 @@ footer {
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 30px;
+    height: 20px;
     width: 100%;
     padding-top: 30px;
 }

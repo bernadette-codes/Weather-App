@@ -20,7 +20,7 @@ function loadForecast(location, woeid) {
         }, // end success function
 
         error: function (error) {
-            $("#forecast").append("<p>"+error+"</p>");
+            $("#forecast").append("<p>" + error + "</p>");
         }
     }); // end simpleWeather
 } // end loadForecast
@@ -30,11 +30,11 @@ function loadWeather() {
     var units = 'imperial',
         url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=' + units + '&appid=16c3de9108ed16c9179c1c51008b687e';
 
-    $.getJSON(url, function(data) {
+    $.getJSON(url, function (data) {
         // Fetch the weather after the API call.
         var tempF = data.main.temp,
             tempUnit = units === 'metric' ? 'C' : 'F',
-            tempC = ((tempF - 32) / (9/5)).toFixed(2),
+            tempC = ((tempF - 32) / (9 / 5)).toFixed(2),
             description = data.weather[0].description;
 
         //Display Temperature
@@ -42,14 +42,14 @@ function loadWeather() {
         $('#weatherToday').html(description);
 
         //Sets Background Color Based on Temperature
-        if(tempF <= 82.4){
+        if (tempF <= 82.4) {
             //Blue Background
             $("body").css("background", "linear-gradient(#3A67AB, #E8F6FF)");
-            $(".colorSet").css({"background-color": "#3A67AB", "color": "#ffffff", "border": "1px solid #E8F6FF"});
+            $(".colorSet").css({ "background-color": "#345c99", "color": "#ffffff" });
         } else {
             //Red Background
             $("body").css("background", "linear-gradient(#ab453a, #f6eceb)");
-            $(".colorSet").css({"background-color": "#ab453a", "color": "#ffffff", "border": "1px solid #f6eceb"});
+            $(".colorSet").css({ "background-color": "#993e34", "color": "#ffffff" });
         }
     });
 
@@ -78,14 +78,14 @@ function showPosition() {
     }
 
     var myOptions = {
-            center: latlon,
-            zoom: 12,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false,
-            navigationControlOptions: {
-                style: google.maps.NavigationControlStyle.SMALL
-            }
-        }, //end myOptions
+        center: latlon,
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL
+        }
+    }, //end myOptions
         map = new google.maps.Map(mapholder, myOptions),
         marker = new google.maps.Marker({
             position: latlon,
@@ -94,8 +94,8 @@ function showPosition() {
         }); // end marker
 } // end showPosition
 
-$(document).ready(function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
+$(document).ready(function () {
+    navigator.geolocation.getCurrentPosition(function (position) {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
 
